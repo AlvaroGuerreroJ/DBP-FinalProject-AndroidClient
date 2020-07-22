@@ -4,48 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".LogInActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Flaskrer"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_activity_button_log_in"
-                android:onClick="goLogInActivity"
-                android:text="Log In"/>
-            <Button
+                android:text="Username:"/>
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_activity_button_register"
-                android:text="Register"/>
+                android:inputType="text"
+                android:id="@+id/log_in_activity_username"
+                android:ems="5"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password:"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/log_in_activity_password"
+                android:ems="5"/>
         </LinearLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/main_activity_button_log_out"
-            android:onClick="logOut"
-            android:text="Log Out"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/main_activity_button_create_post"
-            android:text="Create Post"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/main_activity_button_view_posts"
-            android:text="View Posts"/>
+            android:id="@+id/log_in_activity_button_log_in"
+            android:onClick="logIn"
+            android:text="Log In"/>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

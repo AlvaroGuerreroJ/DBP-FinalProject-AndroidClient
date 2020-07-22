@@ -2,15 +2,34 @@ package com.example.flaskrer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
-    User loggedInUser;
+    static final String serverIpAddress = "192.168.1.21";
+    static final String serverPort = "8080";
+
+    static RequestQueue queue;
+
+    static User loggedInUser;
 
     Button logInButton;
     Button registerButton;
@@ -26,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // From: https://stackoverflow.com/questions/16680701/using-cookies-with-android-volley-library
+        CookieHandler.setDefault(new CookieManager());
+
+        queue = Volley.newRequestQueue(this);
 
         loggedInUser = null;
 
@@ -68,5 +92,53 @@ public class MainActivity extends AppCompatActivity {
         for (Button b : toIterate) {
             b.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void goLogInActivity(View view) {
+        Intent intent = new Intent(this, LogInActivity.class);
+        startActivity(intent);
+    }
+
+    public void logOut(View view) {
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                buildUrl("api", "log_out"),
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            showMessage(getApplicationContext(), response.getString("msg"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        loggedInUser = null;
+                        showAndHideButtons();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        showMessage(getApplicationContext(), "Couldn't log out");
+                    }
+                }
+        );
+
+        queue.add(request);
+    }
+
+    static public String buildUrl(String ...parts) {
+        StringBuilder ret = new StringBuilder("http://" + serverIpAddress + ":" + serverPort);
+
+        for (String s : parts) {
+            ret.append("/");
+            ret.append(s);
+        }
+
+        return ret.toString();
+    }
+
+    static public void showMessage(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 }
