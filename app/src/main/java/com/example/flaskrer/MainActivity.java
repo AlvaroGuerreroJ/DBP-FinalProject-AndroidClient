@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goRegisterActivity(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
     public void logOut(View view) {
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
