@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_activity_button_create_post"
+            android:onClick="goCreatePostActivity"
             android:text="Create Post"/>
         <Button
             android:layout_width="wrap_content"
