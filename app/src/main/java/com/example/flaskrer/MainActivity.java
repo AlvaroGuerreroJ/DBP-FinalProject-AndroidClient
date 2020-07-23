@@ -146,4 +146,10 @@ public class MainActivity extends AppCompatActivity {
     static public void showMessage(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
+
+
+    public void goCreatePostActivity(View view) {
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        startActivity(intent);
+    }
 }
