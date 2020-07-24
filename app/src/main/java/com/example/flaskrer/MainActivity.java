@@ -152,4 +152,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreatePostActivity.class);
         startActivity(intent);
     }
+
+    public void goViewPostsActivity(View view) {
+        Intent intent = new Intent(this, ViewPostsActivity.class);
+        startActivity(intent);
+    }
 }
