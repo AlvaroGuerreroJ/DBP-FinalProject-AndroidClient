@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flaskrer.MainActivity;
 import com.example.flaskrer.R;
+import com.example.flaskrer.ViewPostActivity;
 import com.example.flaskrer.models.Post;
 import com.squareup.picasso.Picasso;
 
@@ -52,18 +53,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             return;
         }
 
-        String imageUrl = MainActivity.buildUrl(
-                "uploads",
-                "id",
-                Integer.toString(post.getId())
-        );
-        Picasso.get().load(imageUrl).into(holder.pic);
+        Picasso.get().load(post.getImageURL()).into(holder.pic);
 
         holder.pic.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(view.getContext(), ViewPostActivity.class);
+                        intent.putExtra("post", post);
+                        view.getContext().startActivity(intent);
                     }
                 }
         );
