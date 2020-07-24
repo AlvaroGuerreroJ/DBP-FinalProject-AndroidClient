@@ -24,7 +24,7 @@ import java.net.CookieManager;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    static final String serverIpAddress = "192.168.1.21";
+    static final String serverIpAddress = "realduckhunter.freemyip.com";
     static final String serverPort = "8080";
 
     static RequestQueue queue;
