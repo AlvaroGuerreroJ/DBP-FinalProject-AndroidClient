@@ -37,13 +37,13 @@ public class ViewPostsActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        recyclerView = findViewById(R.id.view_posts_activity_recycler_view);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        recyclerView = findViewById(R.id.view_posts_activity_recycler_view);
 
         getPosts();
     }
