@@ -109,8 +109,8 @@ public class ViewPostActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        recyclerView.removeAllViewsInLayout();
                         CommentsAdapter commentsAdapter = new CommentsAdapter(response);
-                        Log.w("Log", Integer.toString(response.length()));
                         recyclerView.setAdapter(commentsAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.addItemDecoration(
